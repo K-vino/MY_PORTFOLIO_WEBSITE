@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Vino K</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <meta name="description" content="Get in touch with Vino K for AI/ML projects, collaborations, or job opportunities." />
+  
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+</head>
+<body>
+  <header class="container header">
+    <a class="brand" href="/">Vino K</a>
+    <nav>
+      <a href="/projects">Projects</a>
+      <a href="/resume">Resume</a>
+      <a href="/about">About</a>
+      <a href="/contact" class="active">Contact</a>
+    </nav>
+  </header>
+  
+  <main class="container">
+    <section class="page-header">
+      <h1>Get In Touch</h1>
+      <p class="page-subtitle">Let's discuss AI/ML projects, collaborations, or opportunities. I'm always excited to work on innovative solutions.</p>
+    </section>
+
+    <section class="contact-section">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Contact Information</h2>
+          <div class="contact-item">
+            <strong>Email:</strong>
+            <a href="mailto:vk5571850@gmail.com">vk5571850@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <strong>Location:</strong>
+            <span>Salem, Tamil Nadu, India</span>
+          </div>
+          <div class="contact-item">
+            <strong>Phone:</strong>
+            <a href="tel:+916374451778">+91 63744 51778</a>
+          </div>
+          
+          <h3>Connect Online</h3>
+          <div class="social-links">
+            <a href="https://github.com/K-vino" target="_blank" class="social-link">
+              <span>GitHub</span>
+            </a>
+            <a href="https://linkedin.com/in/vino-k" target="_blank" class="social-link">
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://unstop.com/u/vino-k2769" target="_blank" class="social-link">
+              <span>Unstop</span>
+            </a>
+            <a href="https://youtube.com/@infotechvmd" target="_blank" class="social-link">
+              <span>YouTube</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form-container">
+          <h2>Send a Message</h2>
+          <form id="contactForm" class="contact-form">
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" required maxlength="100">
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required maxlength="255">
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" maxlength="200">
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" required maxlength="2000" rows="6" placeholder="Tell me about your project, opportunity, or how we can collaborate..."></textarea>
+            </div>
+            
+            <!-- Honeypot for spam protection -->
+            <input type="text" name="honeypot" style="display: none;" tabindex="-1" autocomplete="off">
+            
+            <button type="submit" class="btn primary" id="submitBtn">
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loading" style="display: none;">Sending...</span>
+            </button>
+          </form>
+          
+          <div id="formStatus" class="form-status"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Ready to Collaborate?</h2>
+      <p>Whether you're looking for an AI/ML engineer, need help with a data project, or want to discuss innovative solutions, I'm here to help.</p>
+      <div class="cta-buttons">
+        <a href="/resume" class="btn secondary">View Resume</a>
+        <a href="/projects" class="btn secondary">See Projects</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Vino K</h3>
+          <p>AI/ML & Data Engineer passionate about building intelligent systems that solve real-world problems.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/resume">Resume</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Connect</h3>
+          <ul>
+            <li><a href="https://github.com/K-vino" target="_blank">GitHub</a></li>
+            <li><a href="https://linkedin.com/in/vino-k" target="_blank">LinkedIn</a></li>
+            <li><a href="https://unstop.com/u/vino-k2769" target="_blank">Unstop</a></li>
+            <li><a href="mailto:vk5571850@gmail.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Vino K. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/scripts/contact.js" defer></script>
+  <script src="/scripts/chat-widget.js" defer></script>
+</body>
+</html>

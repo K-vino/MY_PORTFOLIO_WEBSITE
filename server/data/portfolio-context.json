@@ -1,0 +1,176 @@
+{
+  "personal": {
+    "name": "Vino K",
+    "title": "AI/ML & Data Engineer",
+    "email": "vk5571850@gmail.com",
+    "phone": "+91 63744 51778",
+    "location": "Salem, Tamil Nadu, India",
+    "linkedin": "https://linkedin.com/in/vino-k",
+    "github": "https://github.com/K-vino",
+    "unstop": "https://unstop.com/u/vino-k2769",
+    "youtube": "https://youtube.com/@infotechvmd"
+  },
+  "summary": "AI/ML & Data Engineer skilled in Python (Pandas, NumPy, TensorFlow, Keras), Django, SQL, PySpark. Experienced in ML pipelines, deep learning, and cloud technologies. Certified in AI, ML, Cloud, and Data Science with 400+ accolades, ranked Top 15 in Engineering on Unstop among 2.3M+ users.",
+  "skills": {
+    "programming": ["Python", "Java", "JavaScript", "SQL", "C++"],
+    "aiml": ["TensorFlow", "Keras", "PyTorch", "Scikit-learn", "NLP", "Computer Vision", "Deep Learning"],
+    "data": ["Pandas", "NumPy", "PySpark", "MongoDB", "MySQL", "ETL", "Data Visualization"],
+    "web": ["Django", "Flask", "React", "Node.js", "HTML/CSS", "REST APIs"],
+    "cloud": ["AWS", "Azure", "Git", "Docker", "Kubernetes", "CI/CD"],
+    "tools": ["Jupyter", "Streamlit", "Power BI", "Git", "VS Code"]
+  },
+  "experience": [
+    {
+      "company": "NovTech R&D Pvt. Ltd.",
+      "role": "AI/ML Intern",
+      "duration": "Oct 2024 - Apr 2025 (Current)",
+      "type": "Internship",
+      "description": "Working on cutting-edge AI/ML projects with focus on deep learning and data engineering",
+      "achievements": [
+        "Built ML pipelines using Python, Streamlit, and TensorFlow",
+        "Performed data preprocessing, model training, tuning, and visualization on real-world datasets",
+        "Developed end-to-end machine learning solutions for business problems"
+      ]
+    },
+    {
+      "company": "YBI Foundation",
+      "role": "AI/ML & Data Engineering Intern",
+      "duration": "May 2024 - Oct 2024",
+      "type": "Internship",
+      "description": "Focused on AI/ML model development and data engineering pipelines",
+      "achievements": [
+        "Developed pipelines using Python, Streamlit, and feature engineering",
+        "Performed model tuning and deployment for real-world applications",
+        "Built mini-projects using Python, OOP, NumPy, Pandas, file handling, and exception management"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Tech in Information Technology",
+      "institution": "Knowledge Institute of Technology, Salem",
+      "duration": "2022-2026 (Current)",
+      "cgpa": "7.5/10",
+      "coursework": ["Data Structures", "Algorithms", "Database Management", "Machine Learning"]
+    },
+    {
+      "degree": "Higher Secondary Certificate (HSC)",
+      "institution": "Kongu Matric Higher Secondary School, Salem",
+      "duration": "2020-2022",
+      "percentage": "66%",
+      "specialization": "Mathematics and Computer Science"
+    }
+  ],
+  "projects": [
+    {
+      "name": "AI Resume Analyzer",
+      "description": "NLP-based resume parser with ATS keyword scoring and semantic matching for job descriptions",
+      "technologies": ["Python", "Streamlit", "spaCy", "NLTK", "OpenAI API", "PostgreSQL"],
+      "features": [
+        "Semantic matching between resume and job descriptions",
+        "ATS keyword scoring and optimization suggestions",
+        "Skills gap analysis and recommendations",
+        "Resume formatting and structure analysis",
+        "Export results to CSV for tracking"
+      ],
+      "impact": "Helped 500+ users improve their resume ATS scores with average score improvement of 35%",
+      "github": "https://github.com/K-vino/AI-Resume-Analyzer-Project"
+    },
+    {
+      "name": "Smart AI for LIFE",
+      "description": "Voice-activated AI assistant for SEO-driven web queries and localized content generation",
+      "technologies": ["Python", "Flask", "Google Speech API", "OpenAI API", "BeautifulSoup", "Selenium"],
+      "features": [
+        "Voice-to-text command processing",
+        "Automated web scraping and data extraction",
+        "SEO-optimized content generation",
+        "Geolocation-based content customization",
+        "Multi-language support"
+      ]
+    },
+    {
+      "name": "ai-meeting-companion",
+      "description": "Browser extension for real-time meeting summaries and action item extraction",
+      "technologies": ["TypeScript", "Web Audio API", "WebRTC", "OpenAI Whisper", "GPT-4"],
+      "features": [
+        "Real-time audio transcription during meetings",
+        "Automatic summary generation",
+        "Action item extraction and categorization",
+        "Integration with popular meeting platforms (Zoom, Meet, Teams)",
+        "Export to various formats (PDF, Markdown, JSON)"
+      ],
+      "impact": "Saves 15-20 minutes per meeting on note-taking, used by 200+ professionals",
+      "github": "https://github.com/K-vino/ai-meeting-companion"
+    },
+    {
+      "name": "HR-chatbot",
+      "description": "RAG-powered chatbot for internal HR policy queries with vector search capabilities",
+      "technologies": ["Python", "FastAPI", "LangChain", "Pinecone", "Sentence Transformers", "Streamlit"],
+      "features": [
+        "Natural language query processing",
+        "Vector-based document search",
+        "Context-aware responses",
+        "Multi-document knowledge base",
+        "Conversation history and analytics"
+      ],
+      "impact": "Reduced HR query response time by 80%, handles 70% of routine HR questions automatically",
+      "github": "https://github.com/K-vino/HR-chatbot"
+    },
+    {
+      "name": "Loan Default Prediction App",
+      "description": "ML classification model with explainability features for loan default risk assessment",
+      "technologies": ["Python", "scikit-learn", "XGBoost", "SHAP", "Streamlit", "Plotly"],
+      "features": [
+        "Multiple ML algorithms comparison (Random Forest, XGBoost, Neural Networks)",
+        "SHAP values for model explainability",
+        "Feature importance analysis",
+        "Risk score calculation",
+        "Interactive dashboard for loan officers"
+      ],
+      "performance": "94% accuracy on test dataset, 0.89 AUC-ROC score, reduced false positives by 25%"
+    }
+  ],
+  "achievements": [
+    {
+      "title": "Top 400 Rank in Engineering",
+      "organization": "Unstop",
+      "description": "Achieved top 400 rank among 2.3M+ users on Unstop platform in Engineering category",
+      "date": "2024"
+    },
+    {
+      "title": "UDEMY Instructor",
+      "organization": "Udemy",
+      "description": "Published and teaching courses on Udemy platform, creating educational content for AI/ML",
+      "date": "2024"
+    },
+    {
+      "title": "130+ GUI Certifications",
+      "organization": "Various Platforms",
+      "description": "Completed over 130 certifications in AI, ML, Cloud, Data Science, and related technologies",
+      "date": "2024"
+    },
+    {
+      "title": "5+ Hackathons India-wide",
+      "organization": "Various Organizations",
+      "description": "Participated in multiple hackathons across India, focusing on AI/ML and web development solutions",
+      "achievements": ["Multiple finalist positions", "Best Innovation Awards"]
+    },
+    {
+      "title": "Web3 Blockchain Voting App",
+      "organization": "Ease The Error 5.0",
+      "description": "Developed a decentralized voting application using blockchain technology",
+      "awards": ["Special Mention Award", "Best Use of Blockchain Technology"]
+    }
+  ],
+  "interests": [
+    "Artificial Intelligence and Machine Learning",
+    "Data Engineering and Analytics",
+    "Natural Language Processing",
+    "Computer Vision",
+    "Cloud Computing",
+    "Blockchain Technology",
+    "Open Source Contributions",
+    "Teaching and Content Creation"
+  ],
+  "availability": "Open to full-time opportunities, internships, freelance projects, and collaborations in AI/ML and Data Engineering"
+}
