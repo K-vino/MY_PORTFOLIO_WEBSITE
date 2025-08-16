@@ -1275,7 +1275,7 @@
                 </div>
 
                 <div class="contact-form" data-aos="fade-left">
-                    <form id="contact-form">
+                    <form id="contact-form" action="mailto:vinokoffical@gmail.com" method="post" enctype="text/plain">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
                             <input type="text" id="name" name="name" required>
@@ -1295,6 +1295,12 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
+
+                        <!-- Backup contact info -->
+                        <div class="contact-backup" style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px; font-size: 14px;">
+                            <strong>Alternative:</strong> Email directly to
+                            <a href="mailto:vinokoffical@gmail.com">vinokoffical@gmail.com</a>
+                        </div>
                     </form>
 
                     <div id="form-status" class="form-status"></div>

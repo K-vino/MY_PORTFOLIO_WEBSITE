@@ -621,5 +621,3 @@ if (typeof window !== 'undefined') {
   window.MegaQAGenerator = MegaQAGenerator;
   window.megaGenerator = megaGenerator;
 }
-
-export default MegaQAGenerator;

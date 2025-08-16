@@ -110,10 +110,10 @@ if ('webkitSpeechRecognition' in window) {
 **Debug:**
 ```javascript
 // Check chatbot instance
-console.log(window.StandaloneChatbot);
+console.log(window.MegaChatbot);
 
 // Check database
-console.log(window.StandaloneChatbot.qaDatabase);
+console.log(window.MegaChatbot.qaDatabase);
 ```
 
 ### **4. Styling Issues**

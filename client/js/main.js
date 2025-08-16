@@ -269,13 +269,35 @@ function validateFormData(data) {
 }
 
 function showFormStatus(message, type) {
-  elements.formStatus.textContent = message;
-  elements.formStatus.className = `form-status ${type}`;
-  elements.formStatus.style.display = 'block';
-  
-  setTimeout(() => {
-    elements.formStatus.style.display = 'none';
-  }, 5000);
+  if (elements.formStatus) {
+    elements.formStatus.textContent = message;
+    elements.formStatus.className = `form-status ${type}`;
+    elements.formStatus.style.display = 'block';
+
+    // Style the status message
+    elements.formStatus.style.padding = '10px';
+    elements.formStatus.style.borderRadius = '5px';
+    elements.formStatus.style.marginTop = '10px';
+    elements.formStatus.style.fontWeight = 'bold';
+
+    if (type === 'success') {
+      elements.formStatus.style.backgroundColor = '#d4edda';
+      elements.formStatus.style.color = '#155724';
+      elements.formStatus.style.border = '1px solid #c3e6cb';
+    } else if (type === 'error') {
+      elements.formStatus.style.backgroundColor = '#f8d7da';
+      elements.formStatus.style.color = '#721c24';
+      elements.formStatus.style.border = '1px solid #f5c6cb';
+    } else if (type === 'info') {
+      elements.formStatus.style.backgroundColor = '#d1ecf1';
+      elements.formStatus.style.color = '#0c5460';
+      elements.formStatus.style.border = '1px solid #bee5eb';
+    }
+
+    setTimeout(() => {
+      elements.formStatus.style.display = 'none';
+    }, 5000);
+  }
 }
 
 // ===== PROJECTS LOADING =====

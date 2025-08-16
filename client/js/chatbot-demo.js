@@ -273,11 +273,9 @@ const chatbotDemo = new ChatbotDemo();
 // Make available globally
 if (typeof window !== 'undefined') {
   window.chatbotDemo = chatbotDemo;
-  
+
   // Auto-show capabilities when loaded
   setTimeout(() => {
     chatbotDemo.showCapabilities();
   }, 2000);
 }
-
-export default ChatbotDemo;
