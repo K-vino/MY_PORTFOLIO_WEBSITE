@@ -1,11 +1,11 @@
-# ===== NETLIFY CONFIGURATION =====
+# ===== NETLIFY CONFIGURATION FOR VINO K PORTFOLIO =====
 
 [build]
-  # Build command (not needed for static site, but can be used for preprocessing)
+  # Build command (not needed for static site)
   command = "echo 'Building Vino K Portfolio...'"
   
-  # Directory to publish (the client folder contains our frontend)
-  publish = "."
+  # Directory to publish - THIS IS THE KEY FIX!
+  publish = "client"
   
   # Functions directory (if using Netlify Functions)
   functions = "netlify/functions"
@@ -17,12 +17,11 @@
 
 # ===== REDIRECTS AND REWRITES =====
 
+# SPA fallback - redirect all routes to index.html for client-side routing
 [[redirects]]
-  # SPA fallback - redirect all routes to index.html for client-side routing
   from = "/*"
   to = "/index.html"
   status = 200
-  conditions = {Role = ["admin"], Country = ["US"]}
 
 # API proxy to backend (when backend is deployed)
 [[redirects]]
@@ -80,31 +79,6 @@
   action = "/thank-you"
   method = "POST"
 
-# ===== EDGE FUNCTIONS =====
-
-# Analytics edge function
-[[edge_functions]]
-  function = "analytics"
-  path = "/*"
-
-# ===== PLUGINS =====
-
-[[plugins]]
-  package = "@netlify/plugin-sitemap"
-  
-  [plugins.inputs]
-    buildDir = "."
-    exclude = [
-      "/admin/**",
-      "/api/**"
-    ]
-
-[[plugins]]
-  package = "netlify-plugin-minify-html"
-  
-  [plugins.inputs]
-    contexts = ["production"]
-
 # ===== CONTEXT-SPECIFIC SETTINGS =====
 
 # Production settings
@@ -121,11 +95,6 @@
   
   [context.deploy-preview.environment]
     NODE_ENV = "staging"
-    API_URL = "https://vino-k-portfolio-api-staging.onrender.com"
-
-# Branch deploy settings
-[context.branch-deploy]
-  command = "echo 'Branch deploy build'"
 
 # Development settings
 [context.dev]
@@ -134,23 +103,6 @@
   [context.dev.environment]
     NODE_ENV = "development"
     API_URL = "http://localhost:5000"
-
-# ===== SPLIT TESTING =====
-
-# A/B test for hero section
-[[split_tests]]
-  path = "/"
-  branches = [
-    { branch = "main", percentage = 80 },
-    { branch = "hero-variant", percentage = 20 }
-  ]
-
-# ===== FUNCTIONS =====
-
-# Netlify Functions configuration
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
 
 # ===== PROCESSING =====
 
@@ -171,49 +123,3 @@
 
 [build.processing.images]
   compress = true
-
-# ===== DEPLOYMENT SETTINGS =====
-
-# Deploy notifications
-[notifications]
-  email = "vk5571859@gmail.com"
-
-# Deploy hooks
-[deploy]
-  ignore = "git diff --quiet HEAD^ HEAD -- client/"
-
-# ===== ANALYTICS =====
-
-# Google Analytics
-[analytics]
-  provider = "google"
-  google_analytics = "G-XXXXXXXXXX"
-
-# ===== IDENTITY =====
-
-# Netlify Identity (if needed for admin features)
-[identity]
-  enable = false
-
-# ===== LARGE MEDIA =====
-
-# Git LFS for large files
-[large_media]
-  enable = false
-
-# ===== CUSTOM DOMAINS =====
-
-# Custom domain settings (uncomment when ready)
-# [[domains]]
-#   domain = "vinok.dev"
-#   branch = "main"
-
-# ===== ENVIRONMENT VARIABLES =====
-# Note: Sensitive environment variables should be set in Netlify UI
-# These are just examples of what might be needed
-
-# [build.environment]
-#   CONTACT_FORM_ENDPOINT = "https://vino-k-portfolio-api.onrender.com/api/contact"
-#   PROJECTS_API_ENDPOINT = "https://vino-k-portfolio-api.onrender.com/api/projects"
-#   GOOGLE_ANALYTICS_ID = "G-XXXXXXXXXX"
-#   SITE_URL = "https://vinok.netlify.app"
