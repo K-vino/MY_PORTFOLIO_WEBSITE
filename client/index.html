@@ -75,6 +75,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="./css/chatbot.css">
+    <link rel="stylesheet" href="./css/advanced-skills.css">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -232,161 +233,529 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Advanced Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2>Technical Skills</h2>
-                <p>Technologies and tools I work with</p>
+                <h2>Technical Expertise</h2>
+                <p>Comprehensive AI/ML, Data Science, Cloud & Development Skills</p>
             </div>
-            
+
+            <!-- Skills Search & Filter -->
+            <div class="skills-controls" data-aos="fade-up" data-aos-delay="100">
+                <div class="search-container">
+                    <input type="text" id="skills-search" placeholder="Search skills..." class="skills-search">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="ai">AI</button>
+                    <button class="filter-btn" data-filter="ml">ML</button>
+                    <button class="filter-btn" data-filter="data">Data</button>
+                    <button class="filter-btn" data-filter="cloud">Cloud</button>
+                    <button class="filter-btn" data-filter="dev">Development</button>
+                </div>
+            </div>
+
             <div class="skills-container">
-                <!-- Programming Languages -->
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                    <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                <!-- 1. Artificial Intelligence (AI) -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="200" data-category="ai">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-brain"></i> Artificial Intelligence (AI)</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
                     <div class="skills-grid">
-                        <div class="skill-item">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
+                        <div class="skill-item" data-skill="prompt engineering">
+                            <i class="fas fa-magic"></i>
+                            <span>Prompt Engineering</span>
                         </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>SQL</span>
+                        <div class="skill-item" data-skill="langchain">
+                            <i class="fas fa-link"></i>
+                            <span>LangChain</span>
                         </div>
-                        <div class="skill-item">
-                            <i class="fab fa-java"></i>
-                            <span>Java</span>
+                        <div class="skill-item" data-skill="crewai">
+                            <i class="fas fa-users"></i>
+                            <span>CrewAI</span>
                         </div>
-                        <div class="skill-item">
-                            <i class="fab fa-js"></i>
-                            <span>JavaScript</span>
+                        <div class="skill-item" data-skill="autogpt">
+                            <i class="fas fa-robot"></i>
+                            <span>AutoGPT</span>
+                        </div>
+                        <div class="skill-item" data-skill="rag">
+                            <i class="fas fa-search-plus"></i>
+                            <span>RAG Systems</span>
+                        </div>
+                        <div class="skill-item" data-skill="knowledge graphs">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Knowledge Graphs</span>
+                        </div>
+                        <div class="skill-item" data-skill="nlp">
+                            <i class="fas fa-language"></i>
+                            <span>NLP</span>
+                        </div>
+                        <div class="skill-item" data-skill="computer vision">
+                            <i class="fas fa-eye"></i>
+                            <span>Computer Vision</span>
+                        </div>
+                        <div class="skill-item" data-skill="opencv">
+                            <i class="fas fa-camera"></i>
+                            <span>OpenCV</span>
+                        </div>
+                        <div class="skill-item" data-skill="yolo">
+                            <i class="fas fa-crosshairs"></i>
+                            <span>YOLO</span>
+                        </div>
+                        <div class="skill-item" data-skill="whisper">
+                            <i class="fas fa-microphone"></i>
+                            <span>Whisper ASR</span>
+                        </div>
+                        <div class="skill-item" data-skill="stable diffusion">
+                            <i class="fas fa-palette"></i>
+                            <span>Stable Diffusion</span>
+                        </div>
+                        <div class="skill-item" data-skill="reinforcement learning">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Reinforcement Learning</span>
+                        </div>
+                        <div class="skill-item" data-skill="gym">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>OpenAI Gym</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- AI/ML & Data Science -->
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                    <h3><i class="fas fa-brain"></i> AI/ML & Data Science</h3>
+                <!-- 2. Machine Learning (ML) -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="300" data-category="ml">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-chart-line"></i> Machine Learning (ML)</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
                     <div class="skills-grid">
-                        <div class="skill-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>TensorFlow</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-robot"></i>
-                            <span>Keras</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-table"></i>
-                            <span>Pandas</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-calculator"></i>
-                            <span>NumPy</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-fire"></i>
-                            <span>PySpark</span>
-                        </div>
-                        <div class="skill-item">
+                        <div class="skill-item" data-skill="scikit-learn">
                             <i class="fas fa-chart-bar"></i>
                             <span>Scikit-learn</span>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Web Development -->
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
-                    <h3><i class="fas fa-globe"></i> Web Development</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <i class="fab fa-python"></i>
-                            <span>Django</span>
+                        <div class="skill-item" data-skill="xgboost">
+                            <i class="fas fa-rocket"></i>
+                            <span>XGBoost</span>
                         </div>
-                        <div class="skill-item">
-                            <i class="fas fa-flask"></i>
-                            <span>Flask</span>
+                        <div class="skill-item" data-skill="lightgbm">
+                            <i class="fas fa-bolt"></i>
+                            <span>LightGBM</span>
                         </div>
-                        <div class="skill-item">
+                        <div class="skill-item" data-skill="random forest">
+                            <i class="fas fa-tree"></i>
+                            <span>Random Forest</span>
+                        </div>
+                        <div class="skill-item" data-skill="svm">
+                            <i class="fas fa-vector-square"></i>
+                            <span>SVM</span>
+                        </div>
+                        <div class="skill-item" data-skill="clustering">
+                            <i class="fas fa-circle-nodes"></i>
+                            <span>Clustering</span>
+                        </div>
+                        <div class="skill-item" data-skill="pca">
+                            <i class="fas fa-compress"></i>
+                            <span>PCA</span>
+                        </div>
+                        <div class="skill-item" data-skill="time series">
+                            <i class="fas fa-chart-area"></i>
+                            <span>Time Series</span>
+                        </div>
+                        <div class="skill-item" data-skill="arima">
+                            <i class="fas fa-wave-square"></i>
+                            <span>ARIMA</span>
+                        </div>
+                        <div class="skill-item" data-skill="prophet">
+                            <i class="fas fa-crystal-ball"></i>
+                            <span>Prophet</span>
+                        </div>
+                        <div class="skill-item" data-skill="mlflow">
                             <i class="fas fa-stream"></i>
-                            <span>Streamlit</span>
+                            <span>MLflow</span>
                         </div>
-                        <div class="skill-item">
-                            <i class="fab fa-node-js"></i>
-                            <span>Node.js</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-react"></i>
-                            <span>React</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-code"></i>
-                            <span>REST APIs</span>
+                        <div class="skill-item" data-skill="hyperparameter tuning">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Hyperparameter Tuning</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Databases -->
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="400">
-                    <h3><i class="fas fa-database"></i> Databases</h3>
+                <!-- 3. Deep Learning (DL) -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="400" data-category="ml">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-network-wired"></i> Deep Learning (DL)</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
                     <div class="skills-grid">
-                        <div class="skill-item">
-                            <i class="fas fa-leaf"></i>
-                            <span>MongoDB</span>
+                        <div class="skill-item" data-skill="tensorflow">
+                            <i class="fas fa-chart-line"></i>
+                            <span>TensorFlow</span>
                         </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>MySQL</span>
+                        <div class="skill-item" data-skill="pytorch">
+                            <i class="fas fa-fire"></i>
+                            <span>PyTorch</span>
                         </div>
-                        <div class="skill-item">
-                            <i class="fas fa-elephant"></i>
-                            <span>PostgreSQL</span>
+                        <div class="skill-item" data-skill="keras">
+                            <i class="fas fa-robot"></i>
+                            <span>Keras</span>
+                        </div>
+                        <div class="skill-item" data-skill="transformers">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transformers</span>
+                        </div>
+                        <div class="skill-item" data-skill="bert">
+                            <i class="fas fa-book"></i>
+                            <span>BERT</span>
+                        </div>
+                        <div class="skill-item" data-skill="gpt">
+                            <i class="fas fa-comments"></i>
+                            <span>GPT Models</span>
+                        </div>
+                        <div class="skill-item" data-skill="llama">
+                            <i class="fas fa-llama"></i>
+                            <span>LLaMA</span>
+                        </div>
+                        <div class="skill-item" data-skill="cnn">
+                            <i class="fas fa-layer-group"></i>
+                            <span>CNN</span>
+                        </div>
+                        <div class="skill-item" data-skill="rnn">
+                            <i class="fas fa-recycle"></i>
+                            <span>RNN/LSTM</span>
+                        </div>
+                        <div class="skill-item" data-skill="gan">
+                            <i class="fas fa-magic"></i>
+                            <span>GANs</span>
+                        </div>
+                        <div class="skill-item" data-skill="autoencoder">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            <span>Autoencoders</span>
+                        </div>
+                        <div class="skill-item" data-skill="attention">
+                            <i class="fas fa-eye"></i>
+                            <span>Attention Mechanisms</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Cloud & DevOps -->
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="500">
-                    <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <i class="fab fa-aws"></i>
-                            <span>AWS</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-microsoft"></i>
-                            <span>Azure</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-git-alt"></i>
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-docker"></i>
-                            <span>Docker</span>
-                        </div>
+                <!-- 4. Data Analytics & Data Science -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="500" data-category="data">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-chart-pie"></i> Data Analytics & Data Science</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
                     </div>
-                </div>
-
-                <!-- Tools & Others -->
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="600">
-                    <h3><i class="fas fa-tools"></i> Tools & Others</h3>
                     <div class="skills-grid">
-                        <div class="skill-item">
+                        <div class="skill-item" data-skill="pandas">
+                            <i class="fas fa-table"></i>
+                            <span>Pandas</span>
+                        </div>
+                        <div class="skill-item" data-skill="numpy">
+                            <i class="fas fa-calculator"></i>
+                            <span>NumPy</span>
+                        </div>
+                        <div class="skill-item" data-skill="matplotlib">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Matplotlib</span>
+                        </div>
+                        <div class="skill-item" data-skill="seaborn">
+                            <i class="fas fa-palette"></i>
+                            <span>Seaborn</span>
+                        </div>
+                        <div class="skill-item" data-skill="plotly">
+                            <i class="fas fa-chart-area"></i>
+                            <span>Plotly</span>
+                        </div>
+                        <div class="skill-item" data-skill="power bi">
                             <i class="fas fa-chart-pie"></i>
                             <span>Power BI</span>
                         </div>
-                        <div class="skill-item">
-                            <i class="fas fa-chart-area"></i>
-                            <span>Data Visualization</span>
+                        <div class="skill-item" data-skill="tableau">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Tableau</span>
                         </div>
-                        <div class="skill-item">
-                            <i class="fab fa-jupyter"></i>
-                            <span>Jupyter</span>
+                        <div class="skill-item" data-skill="eda">
+                            <i class="fas fa-search"></i>
+                            <span>EDA</span>
                         </div>
-                        <div class="skill-item">
+                        <div class="skill-item" data-skill="statistical modeling">
+                            <i class="fas fa-calculator"></i>
+                            <span>Statistical Modeling</span>
+                        </div>
+                        <div class="skill-item" data-skill="hypothesis testing">
+                            <i class="fas fa-flask"></i>
+                            <span>Hypothesis Testing</span>
+                        </div>
+                        <div class="skill-item" data-skill="ab testing">
+                            <i class="fas fa-balance-scale"></i>
+                            <span>A/B Testing</span>
+                        </div>
+                        <div class="skill-item" data-skill="feature engineering">
+                            <i class="fas fa-cogs"></i>
+                            <span>Feature Engineering</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Data Engineering -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="600" data-category="data">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-database"></i> Data Engineering</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="skills-grid">
+                        <div class="skill-item" data-skill="sql">
+                            <i class="fas fa-database"></i>
+                            <span>SQL</span>
+                        </div>
+                        <div class="skill-item" data-skill="mysql">
+                            <i class="fas fa-database"></i>
+                            <span>MySQL</span>
+                        </div>
+                        <div class="skill-item" data-skill="postgresql">
+                            <i class="fas fa-elephant"></i>
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="skill-item" data-skill="mongodb">
+                            <i class="fas fa-leaf"></i>
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="skill-item" data-skill="bigquery">
+                            <i class="fab fa-google"></i>
+                            <span>BigQuery</span>
+                        </div>
+                        <div class="skill-item" data-skill="apache spark">
+                            <i class="fas fa-fire"></i>
+                            <span>Apache Spark</span>
+                        </div>
+                        <div class="skill-item" data-skill="pyspark">
+                            <i class="fas fa-fire"></i>
+                            <span>PySpark</span>
+                        </div>
+                        <div class="skill-item" data-skill="airflow">
+                            <i class="fas fa-wind"></i>
+                            <span>Apache Airflow</span>
+                        </div>
+                        <div class="skill-item" data-skill="kafka">
+                            <i class="fas fa-stream"></i>
+                            <span>Apache Kafka</span>
+                        </div>
+                        <div class="skill-item" data-skill="databricks">
+                            <i class="fas fa-cube"></i>
+                            <span>Databricks</span>
+                        </div>
+                        <div class="skill-item" data-skill="snowflake">
+                            <i class="fas fa-snowflake"></i>
+                            <span>Snowflake</span>
+                        </div>
+                        <div class="skill-item" data-skill="etl">
                             <i class="fas fa-code-branch"></i>
-                            <span>ETL</span>
+                            <span>ETL/ELT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Cloud Computing -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="700" data-category="cloud">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-cloud"></i> Cloud Computing</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="skills-grid">
+                        <div class="skill-item" data-skill="aws">
+                            <i class="fab fa-aws"></i>
+                            <span>AWS</span>
+                        </div>
+                        <div class="skill-item" data-skill="ec2">
+                            <i class="fas fa-server"></i>
+                            <span>EC2</span>
+                        </div>
+                        <div class="skill-item" data-skill="s3">
+                            <i class="fas fa-hdd"></i>
+                            <span>S3</span>
+                        </div>
+                        <div class="skill-item" data-skill="lambda">
+                            <i class="fas fa-bolt"></i>
+                            <span>Lambda</span>
+                        </div>
+                        <div class="skill-item" data-skill="sagemaker">
+                            <i class="fas fa-brain"></i>
+                            <span>SageMaker</span>
+                        </div>
+                        <div class="skill-item" data-skill="azure">
+                            <i class="fab fa-microsoft"></i>
+                            <span>Azure</span>
+                        </div>
+                        <div class="skill-item" data-skill="azure ml">
+                            <i class="fas fa-robot"></i>
+                            <span>Azure ML</span>
+                        </div>
+                        <div class="skill-item" data-skill="google cloud">
+                            <i class="fab fa-google"></i>
+                            <span>Google Cloud</span>
+                        </div>
+                        <div class="skill-item" data-skill="vertex ai">
+                            <i class="fas fa-brain"></i>
+                            <span>Vertex AI</span>
+                        </div>
+                        <div class="skill-item" data-skill="docker">
+                            <i class="fab fa-docker"></i>
+                            <span>Docker</span>
+                        </div>
+                        <div class="skill-item" data-skill="kubernetes">
+                            <i class="fas fa-dharmachakra"></i>
+                            <span>Kubernetes</span>
+                        </div>
+                        <div class="skill-item" data-skill="terraform">
+                            <i class="fas fa-layer-group"></i>
+                            <span>Terraform</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Research & Development -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="800" data-category="ai">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-microscope"></i> Research & Development</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="skills-grid">
+                        <div class="skill-item" data-skill="research papers">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Research Papers</span>
+                        </div>
+                        <div class="skill-item" data-skill="literature review">
+                            <i class="fas fa-book-open"></i>
+                            <span>Literature Review</span>
+                        </div>
+                        <div class="skill-item" data-skill="reproducibility">
+                            <i class="fas fa-redo"></i>
+                            <span>Reproducibility</span>
+                        </div>
+                        <div class="skill-item" data-skill="benchmarking">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Model Benchmarking</span>
+                        </div>
+                        <div class="skill-item" data-skill="custom datasets">
+                            <i class="fas fa-database"></i>
+                            <span>Custom Datasets</span>
+                        </div>
+                        <div class="skill-item" data-skill="fine-tuning">
+                            <i class="fas fa-adjust"></i>
+                            <span>Model Fine-tuning</span>
+                        </div>
+                        <div class="skill-item" data-skill="ethical ai">
+                            <i class="fas fa-balance-scale"></i>
+                            <span>Ethical AI</span>
+                        </div>
+                        <div class="skill-item" data-skill="responsible ai">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Responsible AI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. AI Tools & Ecosystem -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="900" data-category="ai">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-toolbox"></i> AI Tools & Ecosystem</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="skills-grid">
+                        <div class="skill-item" data-skill="hugging face">
+                            <i class="fas fa-smile"></i>
+                            <span>Hugging Face</span>
+                        </div>
+                        <div class="skill-item" data-skill="llamaindex">
+                            <i class="fas fa-list"></i>
+                            <span>LlamaIndex</span>
+                        </div>
+                        <div class="skill-item" data-skill="openai api">
+                            <i class="fas fa-robot"></i>
+                            <span>OpenAI API</span>
+                        </div>
+                        <div class="skill-item" data-skill="anthropic">
+                            <i class="fas fa-brain"></i>
+                            <span>Anthropic Claude</span>
+                        </div>
+                        <div class="skill-item" data-skill="weights and biases">
+                            <i class="fas fa-weight"></i>
+                            <span>W&B</span>
+                        </div>
+                        <div class="skill-item" data-skill="gradio">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Gradio</span>
+                        </div>
+                        <div class="skill-item" data-skill="streamlit">
+                            <i class="fas fa-stream"></i>
+                            <span>Streamlit</span>
+                        </div>
+                        <div class="skill-item" data-skill="automl">
+                            <i class="fas fa-magic"></i>
+                            <span>AutoML</span>
+                        </div>
+                        <div class="skill-item" data-skill="h2o">
+                            <i class="fas fa-tint"></i>
+                            <span>H2O.ai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Development & Programming -->
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="1000" data-category="dev">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-code"></i> Development & Programming</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="skills-grid">
+                        <div class="skill-item" data-skill="python">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item" data-skill="java">
+                            <i class="fab fa-java"></i>
+                            <span>Java</span>
+                        </div>
+                        <div class="skill-item" data-skill="javascript">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item" data-skill="django">
+                            <i class="fab fa-python"></i>
+                            <span>Django</span>
+                        </div>
+                        <div class="skill-item" data-skill="flask">
+                            <i class="fas fa-flask"></i>
+                            <span>Flask</span>
+                        </div>
+                        <div class="skill-item" data-skill="fastapi">
+                            <i class="fas fa-rocket"></i>
+                            <span>FastAPI</span>
+                        </div>
+                        <div class="skill-item" data-skill="react">
+                            <i class="fab fa-react"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="skill-item" data-skill="nodejs">
+                            <i class="fab fa-node-js"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="skill-item" data-skill="git">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item" data-skill="github actions">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub Actions</span>
+                        </div>
+                        <div class="skill-item" data-skill="rest api">
+                            <i class="fas fa-code"></i>
+                            <span>REST APIs</span>
+                        </div>
+                        <div class="skill-item" data-skill="graphql">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>GraphQL</span>
                         </div>
                     </div>
                 </div>
@@ -1095,6 +1464,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Advanced Skills Scripts -->
+    <script src="./js/advanced-skills.js"></script>
 
     <!-- Chatbot Scripts -->
     <script src="./js/chatbot-standalone.js"></script>

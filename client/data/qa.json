@@ -341,6 +341,46 @@
       "answer": "In 5 years, I see myself as a senior AI/ML engineer leading innovative projects that solve real-world problems. I want to contribute to cutting-edge research while mentoring junior developers and staying at the forefront of emerging technologies.",
       "keywords": ["future", "5 years", "goals", "vision"],
       "confidence": 1.0
+    },
+    {
+      "id": 41,
+      "category": "skills_technical",
+      "question": "Do you know LangChain?",
+      "answer": "Yes, I'm experienced with LangChain! I use it for building AI agents and applications powered by language models. It's excellent for creating RAG systems, multi-agent workflows, and integrating LLMs with external data sources.",
+      "keywords": ["langchain", "ai agents", "llm", "rag"],
+      "confidence": 1.0
+    },
+    {
+      "id": 42,
+      "category": "skills_technical",
+      "question": "What AI tools do you use?",
+      "answer": "I work with a comprehensive AI ecosystem including Hugging Face Transformers, LangChain, OpenAI APIs, Weights & Biases for experiment tracking, Streamlit and Gradio for AI apps, and AutoML platforms like H2O.ai. I also use CrewAI for multi-agent systems.",
+      "keywords": ["ai tools", "hugging face", "openai", "automl", "crewai"],
+      "confidence": 1.0
+    },
+    {
+      "id": 43,
+      "category": "skills_technical",
+      "question": "Do you work with Transformers?",
+      "answer": "Absolutely! I have extensive experience with Transformer models including BERT, GPT, T5, and LLaMA. I work with Hugging Face Transformers library for fine-tuning, inference, and building custom NLP applications.",
+      "keywords": ["transformers", "bert", "gpt", "llama", "hugging face"],
+      "confidence": 1.0
+    },
+    {
+      "id": 44,
+      "category": "skills_technical",
+      "question": "What's your experience with RAG systems?",
+      "answer": "I build Retrieval-Augmented Generation (RAG) systems using LangChain and LlamaIndex. These systems combine the power of large language models with external knowledge bases to provide accurate, contextual responses for domain-specific applications.",
+      "keywords": ["rag", "retrieval augmented generation", "langchain", "llamaindex"],
+      "confidence": 1.0
+    },
+    {
+      "id": 45,
+      "category": "skills_technical",
+      "question": "Do you know PyTorch?",
+      "answer": "Yes, I'm proficient in PyTorch for deep learning research and production. I use it for building custom neural networks, training models, and implementing cutting-edge architectures. I also work with PyTorch Lightning for structured training workflows.",
+      "keywords": ["pytorch", "deep learning", "neural networks", "pytorch lightning"],
+      "confidence": 1.0
     }
   ]
 }
