@@ -45,6 +45,13 @@ function initializeApp() {
   initializeContactForm();
   loadProjects();
   initializeAnimations();
+
+  // Import and initialize vertical scroll
+  import('./vertical-scroll.js').then(() => {
+    console.log('Vertical scroll module loaded');
+  }).catch(err => {
+    console.error('Failed to load vertical scroll module:', err);
+  });
   
   console.log('Portfolio website initialized successfully!');
 }

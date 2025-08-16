@@ -10,8 +10,8 @@ const projectsData = {
         stats: {
             repositories: 46,
             stars: 2,
-            followers: 3,
-            following: 1
+            followers: 150,
+            following: 10
         }
     },
     

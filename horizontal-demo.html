@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vino K - Horizontal Portfolio Demo</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="client/css/variables.css">
+    <link rel="stylesheet" href="client/css/style.css">
+    <link rel="stylesheet" href="client/css/responsive.css">
+    
+    <style>
+        /* Demo-specific styles */
+        .demo-instructions {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            max-width: 300px;
+            z-index: 1001;
+            box-shadow: var(--shadow-large);
+            font-size: var(--font-size-sm);
+        }
+        
+        .demo-instructions h4 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+            font-size: var(--font-size-base);
+        }
+        
+        .demo-instructions ul {
+            margin: 0;
+            padding-left: var(--spacing-lg);
+        }
+        
+        .demo-instructions li {
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-secondary);
+        }
+        
+        .demo-close {
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: var(--font-size-lg);
+        }
+        
+        .demo-close:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Section content styling for demo */
+        .demo-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-3xl);
+            min-height: 100vh;
+        }
+        
+        .demo-section h1 {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--spacing-lg);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .demo-section p {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+        
+        .section-number {
+            position: absolute;
+            top: var(--spacing-xl);
+            left: var(--spacing-xl);
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* Different background colors for sections */
+        .section-panel:nth-child(1) { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .section-panel:nth-child(2) { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+        .section-panel:nth-child(3) { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
+        .section-panel:nth-child(4) { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; }
+        .section-panel:nth-child(5) { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; }
+        
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-2xl);
+            max-width: 800px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .feature-card i {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-sm);
+            opacity: 0.9;
+        }
+        
+        .feature-card h5 {
+            margin-bottom: var(--spacing-sm);
+            font-size: var(--font-size-base);
+        }
+        
+        .feature-card p {
+            font-size: var(--font-size-sm);
+            opacity: 0.8;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Instructions -->
+    <div class="demo-instructions" id="demoInstructions">
+        <button class="demo-close" onclick="document.getElementById('demoInstructions').style.display='none'">
+            <i class="fas fa-times"></i>
+        </button>
+        <h4>🔄 Navigation Controls</h4>
+        <ul>
+            <li><strong>Mouse:</strong> Scroll wheel up/down</li>
+            <li><strong>Touch:</strong> Swipe left/right</li>
+            <li><strong>Keyboard:</strong> Arrow keys ← →</li>
+            <li><strong>Arrows:</strong> Click side buttons</li>
+            <li><strong>Dots:</strong> Click bottom indicators</li>
+        </ul>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar horizontal-mode">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="#" class="brand-link">
+                    <span class="brand-text">Vino K</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-section="0">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="1">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="2">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="3">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="4">Contact</a>
+                </li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Horizontal Container (will be created by JavaScript) -->
+    
+    <!-- Demo Sections -->
+    <section class="hero">
+        <div class="demo-section">
+            <div class="section-number">1</div>
+            <h1>🏠 Welcome Home</h1>
+            <p>This is the home section of the horizontal scrolling portfolio. Navigate using mouse wheel, touch swipes, arrow keys, or the navigation controls.</p>
+            <div class="demo-features">
+                <div class="feature-card">
+                    <i class="fas fa-mouse"></i>
+                    <h5>Mouse Wheel</h5>
+                    <p>Scroll up/down to navigate</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-hand-pointer"></i>
+                    <h5>Touch Swipe</h5>
+                    <p>Swipe left/right on mobile</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-keyboard"></i>
+                    <h5>Arrow Keys</h5>
+                    <p>Use ← → keys to navigate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="demo-section">
+            <div class="section-number">2</div>
+            <h1>👨‍💻 About Me</h1>
+            <p>Data Science & AI Enthusiast | Learning Path in Data Analysis | YouTuber Sharing My Journey. This section would contain detailed information about my background, experience, and passion for technology.</p>
+            <div class="demo-features">
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h5>AI & ML</h5>
+                    <p>Machine Learning Expert</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h5>Data Science</h5>
+                    <p>Data Analysis Specialist</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fab fa-youtube"></i>
+                    <h5>Content Creator</h5>
+                    <p>Educational YouTuber</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills">
+        <div class="demo-section">
+            <div class="section-number">3</div>
+            <h1>🛠️ Skills & Technologies</h1>
+            <p>Comprehensive overview of my technical skills, programming languages, frameworks, and tools. From Python and machine learning to web development and cloud technologies.</p>
+            <div class="demo-features">
+                <div class="feature-card">
+                    <i class="fab fa-python"></i>
+                    <h5>Python</h5>
+                    <p>Advanced programming</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h5>Machine Learning</h5>
+                    <p>ML model development</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fab fa-js-square"></i>
+                    <h5>JavaScript</h5>
+                    <p>Full-stack development</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cloud"></i>
+                    <h5>Cloud Computing</h5>
+                    <p>AWS, Azure, GCP</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <div class="demo-section">
+            <div class="section-number">4</div>
+            <h1>🚀 Projects Portfolio</h1>
+            <p>Showcase of 46+ GitHub repositories including AI/ML projects, web applications, data science notebooks, and innovative solutions. Each project demonstrates different aspects of my technical expertise.</p>
+            <div class="demo-features">
+                <div class="feature-card">
+                    <i class="fas fa-code"></i>
+                    <h5>46+ Repositories</h5>
+                    <p>Diverse project collection</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-star"></i>
+                    <h5>Featured Projects</h5>
+                    <p>Highlighted achievements</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-filter"></i>
+                    <h5>Smart Filtering</h5>
+                    <p>Category-based browsing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="demo-section">
+            <div class="section-number">5</div>
+            <h1>📧 Get In Touch</h1>
+            <p>Ready to collaborate or discuss opportunities? Reach out through various channels including email, LinkedIn, GitHub, or my YouTube channel. Let's build something amazing together!</p>
+            <div class="demo-features">
+                <div class="feature-card">
+                    <i class="fas fa-envelope"></i>
+                    <h5>Email</h5>
+                    <p>vinokoffical@gmail.com</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fab fa-linkedin"></i>
+                    <h5>LinkedIn</h5>
+                    <p>Professional networking</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fab fa-github"></i>
+                    <h5>GitHub</h5>
+                    <p>Code collaboration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="client/js/horizontal-scroll.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+        
+        // Basic theme toggle
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            const icon = document.querySelector('#theme-toggle i');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        });
+        
+        // Listen for section changes
+        document.addEventListener('sectionChange', (e) => {
+            console.log(`📍 Navigated to: ${e.detail.sectionName} (${e.detail.currentSection + 1}/${e.detail.totalSections})`);
+        });
+        
+        // Auto-hide instructions after 10 seconds
+        setTimeout(() => {
+            const instructions = document.getElementById('demoInstructions');
+            if (instructions) {
+                instructions.style.opacity = '0.7';
+            }
+        }, 10000);
+        
+        console.log('🔄 Horizontal Portfolio Demo Loaded!');
+        console.log('📱 Try swiping on mobile or using mouse wheel on desktop');
+    </script>
+</body>
+</html>

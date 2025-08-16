@@ -35,6 +35,27 @@
   .projects-container {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
+
+  /* Horizontal Navigation Tablet */
+  .horizontal-nav {
+    gap: var(--spacing-md);
+  }
+
+  .nav-arrow {
+    width: 45px;
+    height: 45px;
+    font-size: var(--font-size-base);
+  }
+
+  .section-indicators {
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+
+  .indicator-dot {
+    width: 10px;
+    height: 10px;
+  }
   
   .achievements-grid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -385,6 +406,94 @@
 
   .projects-counter {
     font-size: var(--font-size-xs);
+  }
+
+  /* Horizontal Navigation Mobile */
+  .horizontal-nav {
+    display: none; /* Hide arrow navigation on mobile */
+  }
+
+  .section-indicators {
+    bottom: var(--spacing-lg);
+    padding: var(--spacing-xs) var(--spacing-md);
+    gap: var(--spacing-xs);
+  }
+
+  .indicator-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .indicator-dot::after {
+    display: none; /* Hide labels on mobile */
+  }
+
+  .section-progress {
+    height: 3px;
+  }
+
+  /* Section panels mobile optimization */
+  .section-panel {
+    padding: 0;
+  }
+
+  .section-panel .container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  /* Experience Section Mobile */
+  .experience-categories {
+    gap: var(--spacing-xs);
+    padding: 0 var(--spacing-sm);
+    margin: 0 -var(--spacing-sm) var(--spacing-lg);
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .category-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .experience-details {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .experience-details span {
+    font-size: 10px;
+    padding: 2px var(--spacing-xs);
+  }
+
+  .certificate-links {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .certificate-link {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+    text-align: center;
+    justify-content: center;
+  }
+
+  .summary-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  .stat-item {
+    padding: var(--spacing-sm);
+  }
+
+  .stat-number {
+    font-size: var(--font-size-xl);
+  }
+
+  .stat-label {
+    font-size: 10px;
   }
   
   .section-header h2 {
