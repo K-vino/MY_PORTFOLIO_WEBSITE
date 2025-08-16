@@ -261,7 +261,8 @@ class VerticalScrollManager {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  new VerticalScrollManager();
+  window.VerticalScrollManager = new VerticalScrollManager();
 });
 
-export default VerticalScrollManager;
+// Make it available globally
+window.VerticalScrollManager = VerticalScrollManager;

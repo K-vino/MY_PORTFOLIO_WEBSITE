@@ -1,22 +1,94 @@
-// ===== PERSONAL CHATBOT FOR VINO K =====
+// ===== STANDALONE CHATBOT (No ES6 Modules, Works with file://) =====
 
-class PersonalChatbot {
+// Embedded Q&A Database (for standalone operation)
+const EMBEDDED_QA_DATABASE = {
+  "metadata": {
+    "version": "1.0",
+    "total_entries": 40,
+    "last_updated": "2025-01-16"
+  },
+  "qa_pairs": [
+    {
+      "id": 1,
+      "category": "personal_info",
+      "question": "What is your name?",
+      "answer": "My name is Vino K. I'm an AIML Developer, Data Scientist, and Cloud Engineer based in Salem, Tamil Nadu, India.",
+      "keywords": ["name", "vino", "k", "who are you"],
+      "confidence": 1.0
+    },
+    {
+      "id": 2,
+      "category": "personal_info",
+      "question": "Who are you?",
+      "answer": "I'm Vino K, a passionate AIML Developer, Data Scientist, and Cloud Engineer. I specialize in transforming data into insights and building intelligent solutions using Python, AI/ML, and cloud technologies.",
+      "keywords": ["who", "about", "introduction", "yourself"],
+      "confidence": 1.0
+    },
+    {
+      "id": 3,
+      "category": "contact_info",
+      "question": "How can I contact you?",
+      "answer": "You can reach me at vinokoffical@gmail.com. You can also connect with me on LinkedIn at https://linkedin.com/in/vino-k or check out my projects on GitHub at https://github.com/K-vino.",
+      "keywords": ["contact", "email", "reach", "linkedin", "github"],
+      "confidence": 1.0
+    },
+    {
+      "id": 4,
+      "category": "skills_technical",
+      "question": "What are your technical skills?",
+      "answer": "My technical skills include Python, SQL, Java, PySpark, NumPy, Pandas, TensorFlow, Keras, Django, Flask, Streamlit, MongoDB, MySQL, AWS, Azure, Git, Power BI, and Data Visualization. I specialize in AI/ML, data science, and cloud engineering.",
+      "keywords": ["skills", "technical", "technologies", "expertise"],
+      "confidence": 1.0
+    },
+    {
+      "id": 5,
+      "category": "skills_technical",
+      "question": "Do you know Python?",
+      "answer": "Yes, Python is my primary programming language! I use it extensively for AI/ML development, data science, web development with Django and Flask, and automation. I'm proficient with libraries like NumPy, Pandas, TensorFlow, and Keras.",
+      "keywords": ["python", "programming", "language"],
+      "confidence": 1.0
+    },
+    {
+      "id": 6,
+      "category": "projects",
+      "question": "What projects have you worked on?",
+      "answer": "I've worked on several exciting projects including an AI Resume Analyzer, Smart AI for LIFE, Expense Tracker, Web3 Blockchain Voting App, HR Chatbot, and a Deep Learning Project Collection. Each project showcases different aspects of my AI/ML and development skills.",
+      "keywords": ["projects", "work", "portfolio", "built"],
+      "confidence": 1.0
+    },
+    {
+      "id": 7,
+      "category": "achievements",
+      "question": "What are your achievements?",
+      "answer": "I have 400+ certifications in various technologies, ranked Top 15 in Engineering on Unstop among 2.3M+ users, and have won multiple hackathons. These achievements reflect my continuous learning mindset and technical expertise.",
+      "keywords": ["achievements", "certifications", "unstop", "hackathons", "awards"],
+      "confidence": 1.0
+    },
+    {
+      "id": 8,
+      "category": "small_talk",
+      "question": "Hello",
+      "answer": "Hello! I'm Vino K, nice to meet you! I'm an AIML Developer and Data Scientist. How can I help you today? Feel free to ask me about my projects, skills, or experience.",
+      "keywords": ["hello", "hi", "hey", "greetings"],
+      "confidence": 1.0
+    }
+  ]
+};
+
+class StandaloneChatbot {
   constructor() {
     this.isOpen = false;
     this.isTyping = false;
     this.conversationHistory = [];
-    this.qaDatabase = null;
-    this.recognition = null;
-    this.synthesis = window.speechSynthesis;
-    this.isListening = false;
+    this.qaDatabase = EMBEDDED_QA_DATABASE;
+    this.voiceEnabled = true;
     
     this.initializeElements();
-    this.loadQADatabase();
     this.setupEventListeners();
-    this.setupVoiceRecognition();
-    this.showWelcomeMessage();
+    this.setupVoiceFeatures();
+    this.showWelcomeNotification();
     
-    console.log('🤖 Personal Chatbot initialized');
+    console.log('🤖 Standalone Chatbot initialized');
   }
 
   initializeElements() {
@@ -31,17 +103,6 @@ class PersonalChatbot {
     this.quickActions = document.getElementById('quick-actions');
     this.notification = document.getElementById('chatbot-notification');
     this.icon = document.getElementById('chatbot-icon');
-  }
-
-  async loadQADatabase() {
-    try {
-      const response = await fetch('./data/qa.json');
-      this.qaDatabase = await response.json();
-      console.log(`Loaded ${this.qaDatabase.qa_pairs.length} Q&A pairs`);
-    } catch (error) {
-      console.error('Failed to load Q&A database:', error);
-      this.qaDatabase = { qa_pairs: [] };
-    }
   }
 
   setupEventListeners() {
@@ -59,7 +120,9 @@ class PersonalChatbot {
     });
 
     // Voice input
-    this.voiceBtn.addEventListener('click', () => this.toggleVoiceInput());
+    if (this.voiceBtn) {
+      this.voiceBtn.addEventListener('click', () => this.toggleVoiceInput());
+    }
 
     // Quick actions
     this.quickActions.addEventListener('click', (e) => {
@@ -69,15 +132,10 @@ class PersonalChatbot {
         this.sendMessage();
       }
     });
-
-    // Auto-resize input
-    this.input.addEventListener('input', () => {
-      this.input.style.height = 'auto';
-      this.input.style.height = Math.min(this.input.scrollHeight, 100) + 'px';
-    });
   }
 
-  setupVoiceRecognition() {
+  setupVoiceFeatures() {
+    // Speech Recognition
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       this.recognition = new SpeechRecognition();
@@ -102,16 +160,14 @@ class PersonalChatbot {
         this.voiceBtn.classList.remove('recording');
         this.voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
       };
-
-      this.recognition.onerror = (event) => {
-        console.error('Speech recognition error:', event.error);
-        this.isListening = false;
-        this.voiceBtn.classList.remove('recording');
-        this.voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
-      };
     } else {
-      this.voiceBtn.style.display = 'none';
+      if (this.voiceBtn) {
+        this.voiceBtn.style.display = 'none';
+      }
     }
+
+    // Speech Synthesis
+    this.synthesis = window.speechSynthesis;
   }
 
   toggleChatbot() {
@@ -145,45 +201,37 @@ class PersonalChatbot {
     }
   }
 
-  async sendMessage() {
+  sendMessage() {
     const message = this.input.value.trim();
     if (!message || this.isTyping) return;
 
     // Add user message
     this.addMessage(message, 'user');
     this.input.value = '';
-    this.input.style.height = 'auto';
 
     // Show typing indicator
     this.showTypingIndicator();
 
     // Process message and get response
-    const response = await this.processMessage(message);
-    
-    // Remove typing indicator and add bot response
     setTimeout(() => {
+      const response = this.processMessage(message);
       this.hideTypingIndicator();
       this.addMessage(response.answer, 'bot');
       
-      // Speak response if synthesis is available
-      if (response.speak) {
+      // Speak response if enabled
+      if (response.speak && this.voiceEnabled) {
         this.speakMessage(response.answer);
       }
-    }, 1000 + Math.random() * 1000); // Realistic typing delay
+    }, 1000 + Math.random() * 1000);
   }
 
-  async processMessage(message) {
+  processMessage(message) {
     // Add to conversation history
     this.conversationHistory.push({
       type: 'user',
       message: message,
       timestamp: new Date()
     });
-
-    // Keep only last 10 exchanges
-    if (this.conversationHistory.length > 20) {
-      this.conversationHistory = this.conversationHistory.slice(-20);
-    }
 
     // Find best matching response
     const response = this.findBestResponse(message);
@@ -199,14 +247,6 @@ class PersonalChatbot {
   }
 
   findBestResponse(userMessage) {
-    if (!this.qaDatabase || !this.qaDatabase.qa_pairs) {
-      return {
-        answer: "I'm still learning! Please try asking about Vino K's skills, projects, or experience.",
-        confidence: 0.5,
-        speak: false
-      };
-    }
-
     const normalizedMessage = userMessage.toLowerCase().trim();
     
     // Check for exact matches first
@@ -269,20 +309,16 @@ class PersonalChatbot {
   getFallbackResponse(message) {
     const fallbacks = [
       {
-        keywords: ['hello', 'hi', 'hey', 'greetings'],
-        response: "Hello! I'm Vino K's AI assistant. I can tell you about his skills, projects, achievements, and experience. What would you like to know?"
+        keywords: ['hello', 'hi', 'hey'],
+        response: "Hello! I'm Vino K's AI assistant. Ask me about his skills, projects, or achievements!"
       },
       {
-        keywords: ['thanks', 'thank you', 'appreciate'],
-        response: "You're welcome! Is there anything else you'd like to know about Vino K?"
+        keywords: ['thanks', 'thank you'],
+        response: "You're welcome! Anything else you'd like to know about Vino K?"
       },
       {
-        keywords: ['bye', 'goodbye', 'see you'],
-        response: "Goodbye! Feel free to come back anytime if you have more questions about Vino K!"
-      },
-      {
-        keywords: ['help', 'what can you do'],
-        response: "I can answer questions about Vino K's technical skills, projects, achievements, education, and experience. Try asking about his Python skills, AI projects, or certifications!"
+        keywords: ['bye', 'goodbye'],
+        response: "Goodbye! Feel free to come back anytime!"
       }
     ];
 
@@ -297,7 +333,7 @@ class PersonalChatbot {
     }
 
     return {
-      answer: "I'm not sure about that. Try asking about Vino K's skills, projects, achievements, or experience. You can also use the quick action buttons below!",
+      answer: "I'm not sure about that. Try asking about Vino K's skills, projects, or achievements!",
       confidence: 0.3,
       speak: false
     };
@@ -366,159 +402,23 @@ class PersonalChatbot {
     this.messages.scrollTop = this.messages.scrollHeight;
   }
 
-  showNotification() {
-    this.notification.style.display = 'flex';
+  showWelcomeNotification() {
+    setTimeout(() => {
+      if (!this.isOpen) {
+        this.notification.style.display = 'flex';
+      }
+    }, 3000);
   }
 
   hideNotification() {
     this.notification.style.display = 'none';
   }
-
-  showWelcomeMessage() {
-    // Show notification after 3 seconds if chatbot is closed
-    setTimeout(() => {
-      if (!this.isOpen) {
-        this.showNotification();
-      }
-    }, 3000);
-  }
-
-  // Export chat history
-  exportChatHistory() {
-    const history = this.conversationHistory
-      .map(entry => `[${entry.timestamp.toLocaleTimeString()}] ${entry.type.toUpperCase()}: ${entry.message}`)
-      .join('\n');
-
-    const blob = new Blob([history], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `vino-k-chat-${new Date().toISOString().split('T')[0]}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  // Add context menu for additional features
-  addContextMenu() {
-    const contextMenu = document.createElement('div');
-    contextMenu.className = 'chatbot-context-menu';
-    contextMenu.innerHTML = `
-      <button class="context-btn" id="export-chat">
-        <i class="fas fa-download"></i> Export Chat
-      </button>
-      <button class="context-btn" id="clear-chat">
-        <i class="fas fa-trash"></i> Clear Chat
-      </button>
-      <button class="context-btn" id="toggle-voice">
-        <i class="fas fa-volume-up"></i> Toggle Voice
-      </button>
-    `;
-
-    this.window.appendChild(contextMenu);
-
-    // Add event listeners
-    document.getElementById('export-chat').addEventListener('click', () => {
-      this.exportChatHistory();
-      this.hideContextMenu();
-    });
-
-    document.getElementById('clear-chat').addEventListener('click', () => {
-      this.clearChat();
-      this.hideContextMenu();
-    });
-
-    document.getElementById('toggle-voice').addEventListener('click', () => {
-      this.toggleVoiceOutput();
-      this.hideContextMenu();
-    });
-  }
-
-  clearChat() {
-    this.messages.innerHTML = `
-      <div class="message bot">
-        <div class="message-avatar">VK</div>
-        <div class="message-content">
-          👋 Hi! I'm Vino K's AI assistant. Ask me anything about my skills, projects, experience, or achievements!
-        </div>
-      </div>
-    `;
-    this.conversationHistory = [];
-  }
-
-  toggleVoiceOutput() {
-    this.voiceEnabled = !this.voiceEnabled;
-    const btn = document.getElementById('toggle-voice');
-    if (this.voiceEnabled) {
-      btn.innerHTML = '<i class="fas fa-volume-up"></i> Voice On';
-    } else {
-      btn.innerHTML = '<i class="fas fa-volume-mute"></i> Voice Off';
-    }
-  }
-
-  hideContextMenu() {
-    const menu = document.querySelector('.chatbot-context-menu');
-    if (menu) {
-      menu.style.display = 'none';
-    }
-  }
-
-  // Enhanced message processing with context awareness
-  processMessageWithContext(message) {
-    const context = this.getConversationContext();
-
-    // Check if this is a follow-up question
-    if (this.isFollowUpQuestion(message, context)) {
-      return this.handleFollowUpQuestion(message, context);
-    }
-
-    return this.findBestResponse(message);
-  }
-
-  getConversationContext() {
-    return this.conversationHistory
-      .slice(-6) // Last 3 exchanges
-      .filter(entry => entry.type === 'bot')
-      .map(entry => entry.message)
-      .join(' ');
-  }
-
-  isFollowUpQuestion(message, context) {
-    const followUpIndicators = [
-      'tell me more', 'more details', 'elaborate', 'explain further',
-      'what about', 'how about', 'can you', 'what else'
-    ];
-
-    return followUpIndicators.some(indicator =>
-      message.toLowerCase().includes(indicator)
-    );
-  }
-
-  handleFollowUpQuestion(message, context) {
-    // Enhanced responses based on context
-    if (context.includes('projects')) {
-      return {
-        answer: "I'd be happy to share more details about my projects! Each one demonstrates different technical skills - from AI/ML in the Resume Analyzer to blockchain technology in the Voting App. Which specific project interests you most?",
-        confidence: 0.9,
-        speak: true
-      };
-    }
-
-    if (context.includes('skills')) {
-      return {
-        answer: "My technical skills span across multiple domains. In AI/ML, I work with TensorFlow and Keras for deep learning. For web development, I use Django and Flask. For cloud computing, I'm experienced with AWS and Azure. What specific area would you like to know more about?",
-        confidence: 0.9,
-        speak: true
-      };
-    }
-
-    return this.findBestResponse(message);
-  }
 }
 
-// Initialize chatbot when DOM is loaded
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  window.PersonalChatbot = new PersonalChatbot();
+  // Only initialize if chatbot container exists
+  if (document.getElementById('chatbot-container')) {
+    window.StandaloneChatbot = new StandaloneChatbot();
+  }
 });
-
-// Make it available globally
-window.PersonalChatbot = PersonalChatbot;

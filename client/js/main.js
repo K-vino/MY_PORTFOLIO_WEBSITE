@@ -46,12 +46,8 @@ function initializeApp() {
   loadProjects();
   initializeAnimations();
 
-  // Import and initialize vertical scroll
-  import('./vertical-scroll.js').then(() => {
-    console.log('Vertical scroll module loaded');
-  }).catch(err => {
-    console.error('Failed to load vertical scroll module:', err);
-  });
+  // Vertical scroll will be initialized by its own script
+  console.log('Vertical scroll will be initialized automatically');
   
   console.log('Portfolio website initialized successfully!');
 }
