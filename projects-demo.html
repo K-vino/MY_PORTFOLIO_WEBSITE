@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vino K - Projects Portfolio Demo</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="client/css/variables.css">
+    <link rel="stylesheet" href="client/css/style.css">
+    <link rel="stylesheet" href="client/css/responsive.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .demo-header {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .demo-header h1 {
+            margin: 0;
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+        }
+        
+        .demo-header p {
+            margin: var(--spacing-sm) 0 0;
+            opacity: 0.9;
+        }
+        
+        .demo-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .demo-nav a {
+            background: var(--primary-color);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .demo-nav a:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Navigation -->
+    <div class="demo-nav">
+        <a href="client/index.html">
+            <i class="fas fa-arrow-left"></i>
+            Back to Full Portfolio
+        </a>
+    </div>
+
+    <!-- Demo Header -->
+    <div class="demo-header">
+        <h1>🚀 Projects Portfolio Demo</h1>
+        <p>Interactive showcase of all 46+ GitHub repositories with advanced filtering and search</p>
+    </div>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">My Projects Portfolio</h2>
+                <p class="section-subtitle">
+                    Explore my journey through AI, Machine Learning, Web Development, and Data Science
+                </p>
+                
+                <!-- GitHub Profile Card -->
+                <div class="github-profile-card" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Profile content will be rendered by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs" data-aos="fade-up" data-aos-delay="200">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="featured">Featured</button>
+                <button class="filter-btn" data-filter="python">Python</button>
+                <button class="filter-btn" data-filter="typescript">TypeScript</button>
+                <button class="filter-btn" data-filter="javascript">JavaScript</button>
+                <button class="filter-btn" data-filter="html">HTML</button>
+                <button class="filter-btn" data-filter="ai-ml">AI/ML</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="public">Public</button>
+                <button class="filter-btn" data-filter="private">Private</button>
+                <button class="filter-btn" data-filter="forked">Forked</button>
+            </div>
+
+            <!-- Search and Sort -->
+            <div class="search-container" data-aos="fade-up" data-aos-delay="300">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="projectSearch" placeholder="Search projects by name, description, or technology...">
+                    <button class="search-clear" id="clearSearch" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="sort-container" data-aos="fade-up" data-aos-delay="350">
+                <select id="sortSelect">
+                    <option value="updated">Sort by: Last Updated</option>
+                    <option value="name">Sort by: Name</option>
+                    <option value="stars">Sort by: Stars</option>
+                    <option value="language">Sort by: Language</option>
+                </select>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="projects-grid" id="projectsGrid" data-aos="fade-up" data-aos-delay="400">
+                <!-- Projects will be loaded dynamically -->
+                <div class="loading-projects">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading projects...</p>
+                </div>
+            </div>
+            
+            <!-- Load More Section -->
+            <div class="load-more-section" data-aos="fade-up" data-aos-delay="500">
+                <div class="projects-counter">
+                    <span id="shownProjects">6</span> of <span id="totalProjects">46</span> projects shown
+                </div>
+                <button class="btn btn-primary load-more-btn" id="loadMoreProjects">
+                    <span class="btn-text">
+                        <i class="fas fa-plus"></i>
+                        Load More Projects
+                    </span>
+                    <span class="btn-loader" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        Loading...
+                    </span>
+                </button>
+                <div class="view-all-github">
+                    <a href="https://github.com/K-vino?tab=repositories" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-github"></i>
+                        View All on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Footer -->
+    <footer style="background: var(--bg-secondary); padding: var(--spacing-xl); text-align: center; margin-top: var(--spacing-3xl);">
+        <p style="color: var(--text-secondary); margin: 0;">
+            <strong>Vino K Portfolio</strong> - Data Science & AI Enthusiast | 
+            <a href="https://github.com/K-vino" target="_blank" style="color: var(--primary-color);">GitHub</a> | 
+            <a href="mailto:vinokoffical@gmail.com" style="color: var(--primary-color);">Contact</a>
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="client/js/projects-data.js"></script>
+    <script src="client/js/projects-manager.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+        
+        // Initialize theme (basic)
+        document.documentElement.setAttribute('data-theme', 'light');
+        
+        // Add some demo interactions
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Projects Portfolio Demo Loaded!');
+            console.log('📊 Total Projects:', projectsData.repositories.length);
+            console.log('🎯 Featured Projects:', projectsData.repositories.filter(p => p.category === 'featured').length);
+            console.log('🐍 Python Projects:', projectsData.repositories.filter(p => p.language === 'Python').length);
+            console.log('📱 TypeScript Projects:', projectsData.repositories.filter(p => p.language === 'TypeScript').length);
+        });
+    </script>
+</body>
+</html>
