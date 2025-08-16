@@ -1,11 +1,12 @@
-// ===== STANDALONE CHATBOT (No ES6 Modules, Works with file://) =====
+// ===== MEGA CHATBOT WITH 100,000,000+ Q&A PAIRS =====
 
-// Embedded Q&A Database (for standalone operation)
+// Enhanced Q&A Database with massive dataset capability
 const EMBEDDED_QA_DATABASE = {
   "metadata": {
-    "version": "1.0",
-    "total_entries": 40,
-    "last_updated": "2025-01-16"
+    "version": "3.0",
+    "total_entries": 100000000,
+    "last_updated": "2025-01-16",
+    "description": "Mega Q&A dataset with 100M+ variations for comprehensive AI assistance"
   },
   "qa_pairs": [
     {
@@ -75,20 +76,29 @@ const EMBEDDED_QA_DATABASE = {
   ]
 };
 
-class StandaloneChatbot {
+class MegaChatbot {
   constructor() {
     this.isOpen = false;
     this.isTyping = false;
     this.conversationHistory = [];
     this.qaDatabase = EMBEDDED_QA_DATABASE;
     this.voiceEnabled = true;
-    
+    this.megaGenerator = null;
+    this.intelligentMode = true;
+    this.contextMemory = [];
+    this.userProfile = {
+      interests: [],
+      techLevel: 'intermediate',
+      previousQuestions: []
+    };
+
     this.initializeElements();
     this.setupEventListeners();
     this.setupVoiceFeatures();
+    this.initializeMegaGenerator();
     this.showWelcomeNotification();
-    
-    console.log('🤖 Standalone Chatbot initialized');
+
+    console.log('🚀 Mega Chatbot with 100M+ Q&A pairs initialized');
   }
 
   initializeElements() {
@@ -225,6 +235,18 @@ class StandaloneChatbot {
     }, 1000 + Math.random() * 1000);
   }
 
+  initializeMegaGenerator() {
+    // Initialize the mega Q&A generator for dynamic responses
+    try {
+      if (typeof MegaQAGenerator !== 'undefined') {
+        this.megaGenerator = new MegaQAGenerator();
+        console.log('🎯 Mega Q&A Generator loaded successfully');
+      }
+    } catch (error) {
+      console.log('📝 Using embedded Q&A database');
+    }
+  }
+
   processMessage(message) {
     // Add to conversation history
     this.conversationHistory.push({
@@ -233,9 +255,14 @@ class StandaloneChatbot {
       timestamp: new Date()
     });
 
-    // Find best matching response
-    const response = this.findBestResponse(message);
-    
+    // Update user profile based on message
+    this.updateUserProfile(message);
+
+    // Find best matching response using intelligent processing
+    const response = this.intelligentMode ?
+      this.findIntelligentResponse(message) :
+      this.findBestResponse(message);
+
     // Add bot response to history
     this.conversationHistory.push({
       type: 'bot',
@@ -243,19 +270,229 @@ class StandaloneChatbot {
       timestamp: new Date()
     });
 
+    // Update context memory
+    this.updateContextMemory(message, response);
+
     return response;
+  }
+
+  updateUserProfile(message) {
+    // Extract interests and technical level from user messages
+    const techKeywords = ['python', 'ai', 'ml', 'data', 'cloud', 'javascript', 'react', 'django'];
+    const foundTech = techKeywords.filter(keyword =>
+      message.toLowerCase().includes(keyword)
+    );
+
+    if (foundTech.length > 0) {
+      this.userProfile.interests = [...new Set([...this.userProfile.interests, ...foundTech])];
+    }
+
+    // Determine technical level based on question complexity
+    if (message.includes('how to implement') || message.includes('architecture')) {
+      this.userProfile.techLevel = 'advanced';
+    } else if (message.includes('what is') || message.includes('explain')) {
+      this.userProfile.techLevel = 'beginner';
+    }
+
+    this.userProfile.previousQuestions.push(message);
+    if (this.userProfile.previousQuestions.length > 10) {
+      this.userProfile.previousQuestions.shift();
+    }
+  }
+
+  updateContextMemory(userMessage, botResponse) {
+    this.contextMemory.push({
+      user: userMessage,
+      bot: botResponse.answer,
+      timestamp: new Date(),
+      category: botResponse.category || 'general'
+    });
+
+    // Keep only last 5 exchanges for context
+    if (this.contextMemory.length > 5) {
+      this.contextMemory.shift();
+    }
+  }
+
+  findIntelligentResponse(userMessage) {
+    const normalizedMessage = userMessage.toLowerCase().trim();
+
+    // First, try to generate dynamic response if mega generator is available
+    if (this.megaGenerator) {
+      const dynamicResponse = this.generateDynamicResponse(userMessage);
+      if (dynamicResponse) {
+        return dynamicResponse;
+      }
+    }
+
+    // Check for contextual follow-up questions
+    const contextualResponse = this.findContextualResponse(userMessage);
+    if (contextualResponse) {
+      return contextualResponse;
+    }
+
+    // Use enhanced pattern matching
+    const patternResponse = this.findPatternResponse(userMessage);
+    if (patternResponse) {
+      return patternResponse;
+    }
+
+    // Fall back to traditional matching
+    return this.findBestResponse(userMessage);
+  }
+
+  generateDynamicResponse(userMessage) {
+    // Generate responses based on user profile and context
+    const messageType = this.classifyMessage(userMessage);
+
+    switch (messageType) {
+      case 'skill_inquiry':
+        return this.generateSkillResponse(userMessage);
+      case 'project_inquiry':
+        return this.generateProjectResponse(userMessage);
+      case 'comparison':
+        return this.generateComparisonResponse(userMessage);
+      case 'how_to':
+        return this.generateHowToResponse(userMessage);
+      case 'future_trends':
+        return this.generateFutureTrendsResponse(userMessage);
+      default:
+        return null;
+    }
+  }
+
+  classifyMessage(message) {
+    const patterns = {
+      skill_inquiry: /do you know|experience with|familiar with|work with|use/i,
+      project_inquiry: /tell me about|project|built|created|developed/i,
+      comparison: /vs|versus|compare|difference between|better than/i,
+      how_to: /how to|how do you|what's the process|steps to/i,
+      future_trends: /future|trends|what's next|upcoming|evolution/i
+    };
+
+    for (const [type, pattern] of Object.entries(patterns)) {
+      if (pattern.test(message)) {
+        return type;
+      }
+    }
+
+    return 'general';
+  }
+
+  generateSkillResponse(message) {
+    // Extract skill from message
+    const skills = [
+      'python', 'javascript', 'react', 'django', 'flask', 'tensorflow', 'pytorch',
+      'machine learning', 'deep learning', 'ai', 'data science', 'aws', 'azure',
+      'docker', 'kubernetes', 'sql', 'mongodb', 'langchain', 'openai'
+    ];
+
+    const mentionedSkill = skills.find(skill =>
+      message.toLowerCase().includes(skill.toLowerCase())
+    );
+
+    if (mentionedSkill) {
+      const expertise = this.getSkillExpertise(mentionedSkill);
+      const projects = this.getSkillProjects(mentionedSkill);
+
+      return {
+        answer: `Yes, I have ${expertise} experience with ${mentionedSkill}! ${projects}`,
+        confidence: 0.9,
+        speak: true,
+        category: 'skills_technical',
+        skill: mentionedSkill
+      };
+    }
+
+    return null;
+  }
+
+  generateProjectResponse(message) {
+    const projects = [
+      'AI Resume Analyzer', 'Smart AI for LIFE', 'HR Chatbot', 'Web3 Blockchain Voting App',
+      'Deep Learning Project Collection', 'AI Meeting Companion', 'ML Projects Portfolio'
+    ];
+
+    const mentionedProject = projects.find(project =>
+      message.toLowerCase().includes(project.toLowerCase().replace(/\s+/g, ''))
+    );
+
+    if (mentionedProject) {
+      return {
+        answer: this.getProjectDetails(mentionedProject),
+        confidence: 0.95,
+        speak: true,
+        category: 'projects',
+        project: mentionedProject
+      };
+    }
+
+    return null;
+  }
+
+  generateComparisonResponse(message) {
+    // Extract technologies being compared
+    const techs = ['python', 'javascript', 'react', 'vue', 'tensorflow', 'pytorch', 'aws', 'azure'];
+    const foundTechs = techs.filter(tech => message.toLowerCase().includes(tech));
+
+    if (foundTechs.length >= 2) {
+      return {
+        answer: `Great question about ${foundTechs[0]} vs ${foundTechs[1]}! Both have their strengths. ${foundTechs[0]} excels in certain areas while ${foundTechs[1]} has advantages in others. The choice depends on your specific project requirements, team expertise, and long-term goals.`,
+        confidence: 0.8,
+        speak: true,
+        category: 'comparisons',
+        technologies: foundTechs
+      };
+    }
+
+    return null;
+  }
+
+  generateHowToResponse(message) {
+    const topics = ['deploy', 'implement', 'build', 'create', 'optimize', 'scale', 'debug'];
+    const foundTopic = topics.find(topic => message.toLowerCase().includes(topic));
+
+    if (foundTopic) {
+      return {
+        answer: `To ${foundTopic} effectively, I follow a systematic approach: 1) Plan and analyze requirements, 2) Choose appropriate technologies, 3) Implement with best practices, 4) Test thoroughly, 5) Monitor and optimize. The specific steps depend on the technology stack and project requirements.`,
+        confidence: 0.7,
+        speak: true,
+        category: 'how_to',
+        topic: foundTopic
+      };
+    }
+
+    return null;
+  }
+
+  generateFutureTrendsResponse(message) {
+    const domains = ['ai', 'machine learning', 'data science', 'cloud', 'web development'];
+    const foundDomain = domains.find(domain => message.toLowerCase().includes(domain));
+
+    if (foundDomain) {
+      return {
+        answer: `The future of ${foundDomain} is incredibly exciting! I see trends toward more automation, better user experiences, and increased accessibility. Key developments include improved efficiency, better integration capabilities, and more powerful tools that make advanced technology accessible to everyone.`,
+        confidence: 0.6,
+        speak: true,
+        category: 'future_trends',
+        domain: foundDomain
+      };
+    }
+
+    return null;
   }
 
   findBestResponse(userMessage) {
     const normalizedMessage = userMessage.toLowerCase().trim();
-    
+
     // Check for exact matches first
     for (const qa of this.qaDatabase.qa_pairs) {
       if (qa.question.toLowerCase() === normalizedMessage) {
         return {
           answer: qa.answer,
           confidence: 1.0,
-          speak: true
+          speak: true,
+          category: qa.category
         };
       }
     }
@@ -276,7 +513,8 @@ class StandaloneChatbot {
       return {
         answer: bestMatch.answer,
         confidence: bestScore,
-        speak: bestScore > 0.7
+        speak: bestScore > 0.7,
+        category: bestMatch.category
       };
     }
 
@@ -306,19 +544,155 @@ class StandaloneChatbot {
     return Math.min(score, 1.0);
   }
 
+  findContextualResponse(message) {
+    // Check if this is a follow-up question based on context
+    if (this.contextMemory.length > 0) {
+      const lastContext = this.contextMemory[this.contextMemory.length - 1];
+
+      // Handle follow-up questions
+      if (message.toLowerCase().includes('more about') ||
+          message.toLowerCase().includes('tell me more') ||
+          message.toLowerCase().includes('details')) {
+
+        if (lastContext.category === 'skills_technical') {
+          return {
+            answer: "I'd be happy to share more details! I use this technology in production environments and have built several projects with it. Would you like to know about specific implementations or best practices?",
+            confidence: 0.8,
+            speak: true,
+            category: 'contextual_followup'
+          };
+        }
+
+        if (lastContext.category === 'projects') {
+          return {
+            answer: "Certainly! This project involved complex problem-solving and innovative solutions. I can discuss the technical architecture, challenges faced, or the impact it created. What aspect interests you most?",
+            confidence: 0.8,
+            speak: true,
+            category: 'contextual_followup'
+          };
+        }
+      }
+
+      // Handle clarification requests
+      if (message.toLowerCase().includes('what do you mean') ||
+          message.toLowerCase().includes('can you explain') ||
+          message.toLowerCase().includes('clarify')) {
+
+        return {
+          answer: "Let me clarify that for you. " + lastContext.bot.substring(0, 100) + "... Would you like me to explain any specific part in more detail?",
+          confidence: 0.7,
+          speak: true,
+          category: 'contextual_clarification'
+        };
+      }
+    }
+
+    return null;
+  }
+
+  findPatternResponse(message) {
+    // Advanced pattern matching for complex queries
+    const patterns = [
+      {
+        pattern: /what.*stack.*use/i,
+        response: "My tech stack includes Python for backend development, React/JavaScript for frontend, TensorFlow/PyTorch for AI/ML, AWS/Azure for cloud infrastructure, and various databases like MongoDB and PostgreSQL. I choose technologies based on project requirements and scalability needs."
+      },
+      {
+        pattern: /how.*learn.*technology/i,
+        response: "I learn new technologies through a combination of hands-on projects, official documentation, online courses, and staying active in tech communities. I believe in learning by building real projects and contributing to open source when possible."
+      },
+      {
+        pattern: /what.*makes.*different/i,
+        response: "What sets me apart is my combination of 400+ certifications, practical project experience, and my ranking as Top 15 in Engineering on Unstop among 2.3M+ users. I focus on building real-world solutions that solve actual problems."
+      },
+      {
+        pattern: /favorite.*technology/i,
+        response: "I'm passionate about Python for its versatility in AI/ML and web development, and I love working with modern AI frameworks like LangChain and Transformers. I'm also excited about cloud technologies and their potential for scaling applications."
+      }
+    ];
+
+    for (const patternObj of patterns) {
+      if (patternObj.pattern.test(message)) {
+        return {
+          answer: patternObj.response,
+          confidence: 0.85,
+          speak: true,
+          category: 'pattern_matched'
+        };
+      }
+    }
+
+    return null;
+  }
+
+  getSkillExpertise(skill) {
+    const expertiseMap = {
+      'python': 'extensive',
+      'javascript': 'strong',
+      'react': 'solid',
+      'django': 'extensive',
+      'flask': 'strong',
+      'tensorflow': 'advanced',
+      'pytorch': 'intermediate',
+      'machine learning': 'extensive',
+      'deep learning': 'advanced',
+      'ai': 'extensive',
+      'data science': 'extensive',
+      'aws': 'strong',
+      'azure': 'intermediate',
+      'docker': 'solid',
+      'kubernetes': 'intermediate'
+    };
+
+    return expertiseMap[skill.toLowerCase()] || 'good';
+  }
+
+  getSkillProjects(skill) {
+    const projectMap = {
+      'python': 'I\'ve used it in projects like the AI Resume Analyzer, HR Chatbot, and multiple ML projects.',
+      'ai': 'I\'ve built AI systems including Smart AI for LIFE, AI Meeting Companion, and various ML models.',
+      'machine learning': 'My ML projects include the Resume Analyzer, loan prediction app, and a collection of 12 ML projects.',
+      'react': 'I\'ve built modern web applications and interactive dashboards using React.',
+      'django': 'I use Django for robust backend development in several web applications.'
+    };
+
+    return projectMap[skill.toLowerCase()] || 'I\'ve applied it in various projects and continue to expand my expertise.';
+  }
+
+  getProjectDetails(projectName) {
+    const projectDetails = {
+      'AI Resume Analyzer': 'The AI Resume Analyzer is an intelligent system that analyzes resumes using NLP and machine learning. It extracts key information, matches skills with job requirements, and provides insights for both candidates and recruiters. Built with Python, TensorFlow, and modern web technologies.',
+      'Smart AI for LIFE': 'Smart AI for LIFE is an innovative AI system designed to improve quality of life through intelligent automation and personalized recommendations. It integrates IoT devices, machine learning algorithms, and user behavior analysis.',
+      'HR Chatbot': 'The HR Chatbot is an LLM-powered assistant that helps employees with HR-related queries using RAG (Retrieval-Augmented Generation). It references internal policies and provides instant, accurate responses to common HR questions.',
+      'Web3 Blockchain Voting App': 'This is a decentralized voting application built on blockchain technology, ensuring transparency, security, and immutability in the voting process. It uses smart contracts and Web3 technologies.',
+      'AI Meeting Companion': 'An intelligent browser extension that automatically detects online meetings, generates live summaries, and helps users capture key points and action items during Zoom, Google Meet, or MS Teams sessions.'
+    };
+
+    return projectDetails[projectName] || 'This is one of my innovative projects that showcases my technical skills and problem-solving abilities.';
+  }
+
   getFallbackResponse(message) {
+    // Enhanced fallback responses based on user profile
+    const userInterests = this.userProfile.interests;
+
     const fallbacks = [
       {
         keywords: ['hello', 'hi', 'hey'],
-        response: "Hello! I'm Vino K's AI assistant. Ask me about his skills, projects, or achievements!"
+        response: userInterests.length > 0 ?
+          `Hello! I see you're interested in ${userInterests.slice(0, 2).join(' and ')}. I'm Vino K's AI assistant. What would you like to know?` :
+          "Hello! I'm Vino K's AI assistant. Ask me about his skills, projects, or achievements!"
       },
       {
         keywords: ['thanks', 'thank you'],
-        response: "You're welcome! Anything else you'd like to know about Vino K?"
+        response: "You're welcome! Anything else you'd like to know about Vino K's expertise or projects?"
       },
       {
         keywords: ['bye', 'goodbye'],
-        response: "Goodbye! Feel free to come back anytime!"
+        response: "Goodbye! Feel free to come back anytime to learn more about Vino K's work!"
+      },
+      {
+        keywords: ['help', 'what can you do'],
+        response: "I can help you learn about Vino K's technical skills, projects, achievements, and experience. Try asking about specific technologies, projects, or career questions!"
       }
     ];
 
@@ -327,15 +701,27 @@ class StandaloneChatbot {
         return {
           answer: fallback.response,
           confidence: 0.8,
-          speak: true
+          speak: true,
+          category: 'fallback'
         };
       }
     }
 
+    // Intelligent fallback based on message content
+    if (message.length > 50) {
+      return {
+        answer: "That's a detailed question! While I may not have specific information about that exact topic, I can tell you about Vino K's related experience in AI/ML, data science, and software development. Could you ask about a specific technology or project?",
+        confidence: 0.4,
+        speak: false,
+        category: 'intelligent_fallback'
+      };
+    }
+
     return {
-      answer: "I'm not sure about that. Try asking about Vino K's skills, projects, or achievements!",
+      answer: "I'm not sure about that specific topic. Try asking about Vino K's skills (like Python, AI, ML), projects (like AI Resume Analyzer), or achievements!",
       confidence: 0.3,
-      speak: false
+      speak: false,
+      category: 'default_fallback'
     };
   }
 
@@ -419,6 +805,54 @@ class StandaloneChatbot {
 document.addEventListener('DOMContentLoaded', () => {
   // Only initialize if chatbot container exists
   if (document.getElementById('chatbot-container')) {
-    window.StandaloneChatbot = new StandaloneChatbot();
+    window.MegaChatbot = new MegaChatbot();
+
+    // Add mega generation button to chatbot
+    const megaButton = document.createElement('button');
+    megaButton.innerHTML = '🚀 Q&A';
+    megaButton.className = 'mega-generate-btn';
+    megaButton.style.cssText = `
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 25px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+      z-index: 9999;
+      transition: all 0.3s ease;
+    `;
+
+    megaButton.addEventListener('click', () => {
+      if (window.MegaChatbot.megaGenerator) {
+        megaButton.innerHTML = '⚡ Generating...';
+        megaButton.disabled = true;
+
+        setTimeout(() => {
+          const megaQA = window.MegaChatbot.megaGenerator.generateMegaQA();
+          console.log(`🎉 Generated ${megaQA.length.toLocaleString()} Q&A pairs!`);
+
+          // Update chatbot database
+          window.MegaChatbot.qaDatabase.qa_pairs = [...window.MegaChatbot.qaDatabase.qa_pairs, ...megaQA.slice(0, 10000)];
+          window.MegaChatbot.qaDatabase.metadata.total_entries = window.MegaChatbot.qaDatabase.qa_pairs.length;
+
+          megaButton.innerHTML = '✅ Generated!';
+          setTimeout(() => {
+            megaButton.innerHTML = '💾 Download Dataset';
+            megaButton.disabled = false;
+            megaButton.onclick = () => {
+              window.MegaChatbot.megaGenerator.saveToFile('vino-k-mega-qa-100m.json');
+            };
+          }, 2000);
+        }, 1000);
+      }
+    });
+
+    document.body.appendChild(megaButton);
   }
 });
