@@ -74,6 +74,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="./css/chatbot.css">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -1034,5 +1035,68 @@
       ]
     }
     </script>
+
+    <!-- Personal Chatbot -->
+    <div class="chatbot-container" id="chatbot-container">
+        <!-- Chatbot Toggle Button -->
+        <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open chatbot">
+            <i class="fas fa-comments" id="chatbot-icon"></i>
+            <div class="chatbot-notification" id="chatbot-notification" style="display: none;">1</div>
+        </button>
+
+        <!-- Chatbot Window -->
+        <div class="chatbot-window" id="chatbot-window">
+            <!-- Header -->
+            <div class="chatbot-header">
+                <div>
+                    <h3 class="chatbot-title">Ask Vino K</h3>
+                    <p class="chatbot-subtitle">AI Assistant • Online</p>
+                </div>
+                <button class="chatbot-close" id="chatbot-close" aria-label="Close chatbot">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot">
+                    <div class="message-avatar">VK</div>
+                    <div class="message-content">
+                        👋 Hi! I'm Vino K's AI assistant. Ask me anything about my skills, projects, experience, or achievements!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions" id="quick-actions">
+                <button class="quick-action" data-question="What are your skills?">Skills</button>
+                <button class="quick-action" data-question="Tell me about your projects">Projects</button>
+                <button class="quick-action" data-question="What are your achievements?">Achievements</button>
+                <button class="quick-action" data-question="How can I contact you?">Contact</button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chatbot-input-area">
+                <input
+                    type="text"
+                    class="chatbot-input"
+                    id="chatbot-input"
+                    placeholder="Ask me anything about Vino K..."
+                    maxlength="500"
+                >
+                <div class="input-buttons">
+                    <button class="input-btn" id="voice-btn" aria-label="Voice input" title="Voice input">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="input-btn" id="send-btn" aria-label="Send message" title="Send message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Scripts -->
+    <script src="./js/chatbot.js" type="module"></script>
 </body>
 </html>
