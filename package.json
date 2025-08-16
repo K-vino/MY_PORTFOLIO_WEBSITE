@@ -1,0 +1,49 @@
+{
+  "name": "vino-k-portfolio",
+  "version": "1.0.0",
+  "description": "Full-stack portfolio website for Vino K - AIML Developer, Data Scientist, Cloud Engineer",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && nodemon app.js",
+    "client": "cd client && live-server --port=3000",
+    "build": "echo 'Building client for production'",
+    "setup": "node setup.js",
+    "install-all": "npm install && cd server && npm install",
+    "seed": "cd server && node seedData.js",
+    "health": "cd server && curl http://localhost:5000/health || echo 'Server not running'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy:frontend": "cd client && netlify deploy --prod",
+    "deploy:backend": "cd server && git push heroku main"
+  },
+  "keywords": [
+    "portfolio",
+    "fullstack",
+    "nodejs",
+    "express",
+    "mongodb",
+    "aiml",
+    "data-science",
+    "cloud-engineering"
+  ],
+  "author": {
+    "name": "Vino K",
+    "email": "vk5571859@gmail.com",
+    "url": "https://vinok.netlify.app"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/K-vino/portfolio-website"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "live-server": "^1.2.2",
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

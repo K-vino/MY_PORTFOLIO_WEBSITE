@@ -1,0 +1,155 @@
+# Render Blueprint for Vino K Portfolio Website
+# This file defines the infrastructure for the backend API
+
+services:
+  # Backend API Service
+  - type: web
+    name: vino-k-portfolio-api
+    env: node
+    region: oregon # Choose region closest to your users
+    plan: free # Change to 'starter' or higher for production
+    buildCommand: cd server && npm ci
+    startCommand: cd server && npm start
+    healthCheckPath: /health
+    
+    # Environment Variables
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: TRUST_PROXY
+        value: true
+      - key: SECURE_COOKIES
+        value: true
+      - key: ENABLE_REQUEST_LOGGING
+        value: true
+      - key: LOG_LEVEL
+        value: info
+      
+      # Database (Set these in Render Dashboard for security)
+      - key: MONGODB_URI
+        sync: false # Set manually in dashboard
+      
+      # Email Configuration (Set these in Render Dashboard)
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      
+      # Security Keys (Generate and set in dashboard)
+      - key: JWT_SECRET
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      
+      # CORS Configuration
+      - key: ALLOWED_ORIGINS
+        value: https://vinok.netlify.app,https://vino-k-portfolio.netlify.app
+      
+      # Rate Limiting
+      - key: RATE_LIMIT_WINDOW
+        value: 15
+      - key: RATE_LIMIT_MAX
+        value: 100
+      - key: CONTACT_RATE_LIMIT
+        value: 5
+      
+      # Feature Flags
+      - key: ENABLE_CONTACT_FORM
+        value: true
+      - key: ENABLE_ANALYTICS
+        value: true
+      - key: MAINTENANCE_MODE
+        value: false
+    
+    # Auto-deploy settings
+    autoDeploy: true
+    branch: main
+    
+    # Health check configuration
+    healthCheck:
+      path: /health
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    
+    # Resource limits
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
+    
+    # Custom domains (configure in Render dashboard)
+    # domains:
+    #   - api.vinok.dev
+    
+    # Build settings
+    buildFilter:
+      paths:
+        - server/**
+        - package.json
+        - render.yaml
+      ignoredPaths:
+        - client/**
+        - README.md
+        - DEPLOYMENT.md
+
+# Database (if using Render PostgreSQL instead of MongoDB Atlas)
+# databases:
+#   - name: vino-portfolio-db
+#     databaseName: vino_portfolio
+#     user: vino_user
+#     plan: free
+#     region: oregon
+
+# Static Site (Alternative to Netlify)
+# - type: static
+#   name: vino-k-portfolio-frontend
+#   buildCommand: echo "Building frontend"
+#   staticPublishPath: ./client
+#   pullRequestPreviewsEnabled: true
+#   buildFilter:
+#     paths:
+#       - client/**
+#     ignoredPaths:
+#       - server/**
+#   headers:
+#     - path: /*
+#       name: X-Frame-Options
+#       value: DENY
+#     - path: /*
+#       name: X-XSS-Protection
+#       value: 1; mode=block
+#     - path: /*
+#       name: X-Content-Type-Options
+#       value: nosniff
+#     - path: /*
+#       name: Referrer-Policy
+#       value: strict-origin-when-cross-origin
+#   routes:
+#     - type: rewrite
+#       source: /api/*
+#       destination: https://vino-k-portfolio-api.onrender.com/api/*
+#     - type: rewrite
+#       source: /*
+#       destination: /index.html
+
+# Background Workers (if needed)
+# - type: worker
+#   name: vino-portfolio-worker
+#   env: node
+#   buildCommand: cd server && npm ci
+#   startCommand: cd server && node workers/emailWorker.js
+#   envVarsFrom:
+#     - service: vino-k-portfolio-api
+
+# Cron Jobs (if needed)
+# - type: cron
+#   name: vino-portfolio-backup
+#   schedule: "0 2 * * *" # Daily at 2 AM
+#   buildCommand: cd server && npm ci
+#   startCommand: cd server && node scripts/backup.js
+#   envVarsFrom:
+#     - service: vino-k-portfolio-api
