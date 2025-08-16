@@ -197,7 +197,7 @@ function initializeContactForm() {
 
 async function handleFormSubmit(e) {
   e.preventDefault();
-  
+
   const formData = new FormData(elements.contactForm);
   const data = {
     name: formData.get('name'),
@@ -219,6 +219,7 @@ async function handleFormSubmit(e) {
   submitBtn.disabled = true;
 
   try {
+    // Try API first, then fallback to mailto
     const response = await fetch(`${CONFIG.API_BASE_URL}/contact`, {
       method: 'POST',
       headers: {
@@ -231,16 +232,35 @@ async function handleFormSubmit(e) {
       showFormStatus('Thank you! Your message has been sent successfully.', 'success');
       elements.contactForm.reset();
     } else {
-      throw new Error('Failed to send message');
+      throw new Error('API failed');
     }
   } catch (error) {
-    console.error('Error sending message:', error);
-    showFormStatus('Sorry, there was an error sending your message. Please try again.', 'error');
+    console.log('API unavailable, using mailto fallback');
+
+    // Fallback to mailto with correct email
+    const mailtoLink = createMailtoLink(data);
+    window.open(mailtoLink, '_blank');
+
+    showFormStatus('Opening your email client... Please send the message from there.', 'info');
+    elements.contactForm.reset();
   } finally {
     // Restore button state
     submitBtn.innerHTML = originalText;
     submitBtn.disabled = false;
   }
+}
+
+function createMailtoLink(data) {
+  const to = 'vinokoffical@gmail.com'; // Updated to correct email
+  const subject = encodeURIComponent(data.subject);
+  const body = encodeURIComponent(
+    `Name: ${data.name}\n` +
+    `Email: ${data.email}\n` +
+    `Subject: ${data.subject}\n\n` +
+    `Message:\n${data.message}`
+  );
+
+  return `mailto:${to}?subject=${subject}&body=${body}`;
 }
 
 function validateFormData(data) {
